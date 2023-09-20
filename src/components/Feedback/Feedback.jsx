@@ -14,6 +14,13 @@ export function Feedback() {
       [type]: prevState[type] + 1,
     }));
   };
+  const countTotalFeedback = () => {
+    return state.good + state.neutral + state.bad;
+  };
+  const countPositiveFeedbackPercentage = () => {
+    const total = countTotalFeedback();
+    return total > 0 ? Math.round((state.good / total) * 100) : 0;
+  };
   return (
     <div>
       <h1>Leave your feedback, please</h1>
@@ -32,6 +39,8 @@ export function Feedback() {
       <p>Good: {state.good}</p>
       <p>Neutral: {state.neutral}</p>
       <p>Bad: {state.bad}</p>
+      <p>Total: {countTotalFeedback()}</p>
+      <p>Positive: {countPositiveFeedbackPercentage()}%</p>
     </div>
   );
 }
